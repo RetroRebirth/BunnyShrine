@@ -1,0 +1,13 @@
+@author
+Chris Williams (cwilli45)
+
+@how_to_run
+- Build on a CSL machine with "make" then run "a.out"
+
+@controls
+Move mouse = look around
+W/A/S/D = walk around
+R = reset position
+X = change bunny's material
+G = toggle grass
+SPACE = toggle animation

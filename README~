@@ -1,0 +1,18 @@
+@author
+Chris Williams (cwilli45)
+
+@issues
+- NONE
+
+@notes
+- Build on a CSL machine with "make" then run "a.out"
+
+@controls
+Move mouse = rotate camera
+W/A/S/D = move camera
+Q/E = lower/raise camera
+SPACE = animate
+R = reset world
+I/J/L/K = move light
+U/O = lower/raise light
+P = change light's animation pattern (nothing OR sunrise/sunset OR move along floor)
