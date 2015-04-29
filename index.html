@@ -1,0 +1,78 @@
+<HTML>
+<HEAD>
+<TITLE>Chris Williams - Final</TITLE>
+<style>
+img.mid {
+   vertical-align: middle;
+}
+</style>
+</HEAD>
+<BODY style="background-color: #97defb">
+<div align=center>
+<div style="width:80%">
+
+<h1>Bunny Shrine by Chris Williams</h1>
+<img src="screenshot.png"/>
+<p>
+   My final project contains technical accomplishments such as <b>three point-source phong lighting</b> (all of which travel along a parametric curve), a bunny with <b>interchangable materials</b>, a <b>hierarchical model</b> of cubes that form a shrine, grass that flows independtly from each other by utilizing <b>shear transforms</b>, a <b>sky box</b> with a gradient shading, and a random floor pattern created from <b>Perlin noise</b> (that is hidden beneath the grass, but there is a way to show it as shown below). Also, I incorportated collision detection so the user can't walk off the ground and a "head bobbing" animation while you walk.
+</p>
+
+<h2>Three Point-Source Phong Lighting</h2>
+<img src="3_lights.png"/>
+<p>
+   Three spheres orbit around the bunny and emit light to light the world. The bunny, grass, and shrine of cubes are all lite up depending on the current position of the three spheres. From my research online, I realized that adding more point-source lights simply involves adding the calculated diffusal and specular to each other without averaging them out.
+</p>
+
+<h2>Interchangable Materials</h2>
+<p>
+   The bunny's material is changed because different diffusal, specular, ambient, and shininess light values are sent to the GPU. You may swap through several preset material colors by pressing <b>X</b>. All of the available colors are shown below:
+</p>
+<table>
+<tr>
+<td><img src="green.png"/></td>
+<td><img src="arrow.png"/></td>
+<td><img src="gold.png"/></td>
+<td><img src="arrow.png"/></td>
+<td><img src="blue.png"/></td>
+<td><img src="arrow.png"/></td>
+<td><img src="ruby.png"/></td> 
+</tr>
+<tr>
+<td align=center><i>Emerald</i></td>
+<td align=center><i></i></td>
+<td align=center><i>Gold</i></td>
+<td align=center><i></i></td>
+<td align=center><i>Sapphire</i></td>
+<td align=center><i></i></td>
+<td align=center><i>Ruby</i></td>
+</tr>
+</table>
+
+<h2>Hierarchical Model</h2>
+<p>
+   The cubes that construct the shrine are hierachically modeled together with a matrix stack they may all move as one entity. My artistic side decided to not animate it or cause it to move as if it was hierarchically modeled since the cubes are supposed to represent a shrine commemerating the bunny. Below is an image of the back-side of the shrine while the light sources are on the opposite side:
+</p>
+<img src="shrine_back.png"/>
+
+<h2>Shear Transforms</h2>
+<p>
+   I was originally hoping to render the grass by utilizing alpha layer texturing mapping as describe in <a href=http://http.developer.nvidia.com/GPUGems/gpugems_ch07.html>this</a> tutorial. However, I was unable to port the texture code supplied to us for Lab 10 in my final project. Instead I found a grass object file <a href=http://tf3dm.com/3d-model/grass-pack-71861.html>here</a> that I used to populate the world. In order to get the flowing effect, I applied a shear transformation to each object. Furthermore, to keep them all from flowing uniformly I added an offset to my time-counter variable for each object I'm rendering. Here is a close up picture of the grass:
+</p>
+<img src="grass.png"/>
+
+<h2>Sky Box</h2>
+<p>
+   Just like the grass, I was originally hoping to apply a texture to the sky box (the sphere surrounding the scene), but it was not meant to be. Instead, I opted to do some nice, subtle shading to apply a daytime gradient of a sky. I check for the Y position of the sphere and calculated the percentage it is from the middle of the sphere (ground level) to the top of the sphere. From there, I take the difference in that percentage and apply the correct amounts of sky-blue color and white color to create the gradient. Following suit, here's a picture of the sky:
+</p>
+<img src="sky.png"/>
+
+<h2>Perlin Noise</h2>
+<p>
+   Before I incorporated the grass models, I was messing around with generating a textured floor of dirt and patches of grass based on Perlin noise principles. I didn't expect to get too far, but I actually ended up with something that looked pretty nice! Just like the sky box gradient, I calculate how much grass-green vs dirt-brown color should be given to a certain patch of ground. However, instead of basing the gradient on the Y position, I created a <code>noise</code> function in my fragment shader that takes a <code>vec2</code> as a seed. That vec2 is the position of the ground from the bottom-left on scale from 0.0 to 1.0 (also known as the uv-vector). To try and create a smoother gradient across the entire surface, I averaged the values nearby a spot. However, I noticed this creates a cool checkered landscape if certain variables are kept as integers. I was satisfied with it as an "easter egg" of sorts, so I decided to keep it as it was. The user my remove the grass objects to view the Perlin noise generated ground by pressing <b>G</b>. Here is a picture of the grass-less landscape:
+</p>
+<img src="no_grass.png"/>
+
+</div>
+</div>
+</BODY>
+</HTML>
